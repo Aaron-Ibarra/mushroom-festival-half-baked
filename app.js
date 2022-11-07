@@ -61,11 +61,11 @@ function displayFriends() {
         //             increment the friends satisfaction and decrement your mushrooms
         //             then display your friends and mushrooms with the updated state
         friendEl.addEventListener('click', () => {
-            if (friendEl.satisfaction < 3 && mushroomCount > 0) {
-                console.log(friendEl.satisfaction);
-                friendEl.satisfaction++;
+            if (friend.satisfaction < 3 && mushroomCount > 0) {
+                friend.satisfaction++;
                 mushroomCount--;
                 displayMushrooms();
+                displayFriends();
             }
         });
         friendsEl.append(friendEl);
