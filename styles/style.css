@@ -197,7 +197,7 @@ footer {
     border-radius: 10px;
 }
 
-.mushrooms {
+.table-items {
     display: flex;
     flex-wrap: wrap-reverse;
     justify-content: flex-end;
@@ -211,6 +211,14 @@ footer {
     background-size: contain;
     background-repeat: no-repeat;
     background-image: url('../assets/porcini.png');
+}
+
+.crunch-bar {
+    width: 100px;
+    height: 100px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-image: url('../assets/crunch-bar.png');
 }
 
 label {

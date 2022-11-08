@@ -1,14 +1,14 @@
 // import functions and grab DOM elements
-import { renderMushroom, renderFriend } from './render-utils.js';
+import { renderItem, renderFriend } from './render-utils.js';
 
 const friendsEl = document.querySelector('.friends');
 const friendInputEl = document.getElementById('friend-input');
-const mushroomsEl = document.querySelector('.mushrooms');
+const tableEl = document.querySelector('.table-items');
 const addMushroomButton = document.getElementById('add-mushroom-button');
 const addFriendButton = document.getElementById('add-friend-button');
 // initialize state
 
-let mushroomCount = 3;
+const tableItems = ['mushroom', 'mushroom', 'mushroom'];
 
 const friendData = [
     {
@@ -31,10 +31,13 @@ const friendData = [
 
 addMushroomButton.addEventListener('click', () => {
     if (Math.random() > 0.5) {
-        alert('found a mushroom!');
-
-        mushroomCount++;
-        displayMushrooms();
+        alert('You found a mushroom!');
+        tableItems.push('mushroom');
+        displayTableItems();
+    } else if (Math.random() > 0.7) {
+        alert('You found a....crunch bar?');
+        tableItems.push('crunch-bar');
+        displayTableItems();
     } else {
         alert('no luck!');
     }
@@ -66,10 +69,18 @@ function displayFriends() {
         //             increment the friends satisfaction and decrement your mushrooms
         //             then display your friends and mushrooms with the updated state
         friendEl.addEventListener('click', () => {
-            if (friend.satisfaction < 3 && mushroomCount > 0) {
+            if (friend.satisfaction < 3 && tableItems[tableItems.length - 1] === 'mushroom') {
                 friend.satisfaction++;
-                mushroomCount--;
-                displayMushrooms();
+                tableItems.pop();
+                displayTableItems();
+                displayFriends();
+            } else if (
+                friend.satisfaction < 3 &&
+                tableItems[tableItems.length - 1] === 'crunch-bar'
+            ) {
+                friend.satisfaction = 3;
+                tableItems.pop();
+                displayTableItems();
                 displayFriends();
             }
         });
@@ -78,15 +89,15 @@ function displayFriends() {
     }
 }
 
-function displayMushrooms() {
+function displayTableItems() {
     // clear out the mushroom div
-    mushroomsEl.textContent = '';
-    for (let i = 0; i < mushroomCount; i++) {
+    tableEl.textContent = '';
+    for (let i = 0; i < tableItems.length; i++) {
         // for each mushroom in your mushroom state, render and append a mushroom
-        const mushroom = renderMushroom(i);
-        mushroomsEl.append(mushroom);
+        const item = renderItem(tableItems[i]);
+        tableEl.append(item);
     }
 }
 
 displayFriends();
-displayMushrooms();
+displayTableItems();
