@@ -1,6 +1,11 @@
-export function renderMushroom() {
+export function renderItem(item) {
     const div = document.createElement('div');
-    div.classList.add('mushroom');
+
+    if (item === 'mushroom') {
+        div.classList.add('mushroom');
+    } else if (item === 'crunch-bar') {
+        div.classList.add('crunch-bar');
+    }
 
     return div;
 }
